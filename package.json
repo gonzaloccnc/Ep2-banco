@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "purgecss --css ./src/styles.css --content ./**/*.{html,js} -o ./src/dist/"
+    "build": "purgecss --css ./src/bootstrap/styles.css --content ./**/*.{html,js} -o ./src/dist/"
   },
   "keywords": [],
   "author": "",

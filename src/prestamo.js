@@ -8,5 +8,5 @@ class CalcularPrestamo {
         this.tea = tea;
     }
 }
-
+/* agregar formulas */
 export default CalcularPrestamo;
