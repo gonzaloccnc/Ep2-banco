@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancos</title>
+    <script src="../src/index.js" type="module"></script>
+    <link rel="stylesheet" href="../src/dist/styles.css">
+</head>
+
+<body>
+
+    <div class="container bg-white" id="root">
+        <header>
+            <h1 class="text-center">Adquirir Prestamo</h1>
+        </header>
+        <section class="contenido-principal">
+            <div class="row justify-content-center">
+                <div class="contenido-primario w-50 p-3">
+                    <h2 class="text-center">Especifica tu prestamo aquí</h2>
+                    <form id="agregar-prestamo" class="d-flex flex-column gap-3" action="#">
+                        <div class="form-group">
+                            <label for="monto-total">Monto Total:</label>
+                            <input type="text" class="form-control" id="monto-total" placeholder="Monto Total">
+                        </div>
+                        <div class="form-group">
+                            <label for="monto-inicial">Monto Incial:</label>
+                            <input type="text" class="form-control" id="monto-inicial" placeholder="Monto Inicial">
+                        </div>
+                        <div class="form-group">
+                            <label for="meses">Plazo / Meses:</label>
+                            <input type="text" class="form-control" id="meses" placeholder="Meses">
+                        </div>
+                        <div class="form-group">
+                            <label for="tasa-anual">Tasa Efectiva Anual(TEA):</label>
+                            <input type="text" class="form-control" id="tasa-anual" placeholder="Tasa Anual">
+                        </div>
+                        <button id="enviar" type="submit" class="btn d-block btn-primary mx-auto">Adquirir</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
