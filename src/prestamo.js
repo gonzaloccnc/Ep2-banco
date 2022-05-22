@@ -19,8 +19,8 @@ class CalcularPrestamo {
 
     calcularTEM() {
 
-        const coTEA = this.teaNumber;
-        const coTEM = ((Math.pow((1 + coTEA), 0.083)) - 1);
+        const coTEA = this.teaNumber + 1;
+        const coTEM = ((Math.pow(coTEA, 1 / 12)) - 1);
         return Number(coTEM);
     }
 
