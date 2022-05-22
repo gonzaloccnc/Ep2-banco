@@ -140,7 +140,7 @@ const Calcular = e => {
             Amortizacion.calcularSaldos();
             divRow.children[0].textContent = i - 1;
             divRow.children[1].textContent = Amortizacion.amortD.toLocaleString('en-US');
-            divRow.children[2].textContent = Amortizacion.interesesD.toFixed(2).toLocaleString('en-US');
+            divRow.children[2].textContent = Amortizacion.interesesD.toLocaleString('en-US');
             divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
 
             if (Amortizacion.pagos <= 0) Amortizacion.pagos = 0;
