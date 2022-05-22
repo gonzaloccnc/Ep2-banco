@@ -8,6 +8,8 @@ class CalcularPrestamo {
         this.tea = tea;
         this.teaNumber = this.tea / 100;
         this.pagos = this.montoTotal - this.montoInicial;
+        this.interesesD = 0;
+        this.amortD = 0;
     }
 
     cuotaRestante() {
@@ -18,7 +20,7 @@ class CalcularPrestamo {
     calcularTEM() {
 
         const coTEA = this.teaNumber;
-        const coTEM = ((Math.pow((1 + coTEA), 0.083)) - 1).toFixed(2);
+        const coTEM = ((Math.pow((1 + coTEA), 0.083)) - 1);
         return Number(coTEM);
     }
 
@@ -35,14 +37,14 @@ class CalcularPrestamo {
     calcularInteres() {
 
         const coTea = this.calcularTEM();
-        const intereses = this.pagos * coTea;
-        return Number(intereses.toFixed(2));
+        this.interesesD = this.pagos * coTea;
+        return Number(this.interesesD.toFixed(2))
     }
 
     calcularAmortizacion() {
 
-        const amortizacion = this.calcularCuotaM() - this.calcularInteres()
-        return Number(amortizacion.toFixed(2));
+        this.amortD = this.calcularCuotaM() - this.calcularInteres()
+        return Number(this.amortD.toFixed(2));
     }
 
     calcularSaldos() {

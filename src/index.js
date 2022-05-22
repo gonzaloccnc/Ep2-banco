@@ -131,60 +131,21 @@ const Calcular = e => {
         })
 
         if (i === 1) {
-            /*SE IMPLEMENTA IF SOLO PARA AGREGAR LOS .00 EN CASO SEA NUMERO ENTERO */
             divRow.firstElementChild.textContent = 0;
-            if (Amortizacion.pagos % 1 === 0) {
-
-                divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US') + ".00";
-            }
-            else {
-
-                divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US')
-            }
+            divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US');
         }
 
         if (i >= 2) {
 
             Amortizacion.calcularSaldos();
             divRow.children[0].textContent = i - 1;
-            /*SE IMPLEMENTA IF SOLO PARA AGREGAR LOS .00 EN CASO SEA NUMERO ENTERO */
-            if (Amortizacion.calcularAmortizacion() % 1 === 0) {
-
-                divRow.children[1].textContent = Amortizacion.calcularAmortizacion().toLocaleString('en-US') + ".00";
-            }
-            else {
-
-                divRow.children[1].textContent = Amortizacion.calcularAmortizacion().toLocaleString('en-US');
-            }
-
-            if (Amortizacion.calcularInteres() % 1 === 0) {
-
-                divRow.children[2].textContent = Amortizacion.calcularInteres().toLocaleString('en-US') + ".00";
-            }
-            else {
-
-                divRow.children[2].textContent = Amortizacion.calcularInteres().toLocaleString('en-US');
-            }
-
-            if (Amortizacion.calcularCuotaM() % 1 === 0) {
-
-                divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US') + ".00";
-            }
-            else {
-
-                divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
-            }
+            divRow.children[1].textContent = Amortizacion.amortD.toLocaleString('en-US');
+            divRow.children[2].textContent = Amortizacion.interesesD.toFixed(2).toLocaleString('en-US');
+            divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
 
             if (Amortizacion.pagos <= 0) Amortizacion.pagos = 0;
-
-            if (Amortizacion.pagos % 0 === 0) {
-
-                divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US') + ".00";
-            }
-            else {
-
-                divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US');
-            }
+            if (Amortizacion.interesesD <= 0) Amortizacion.interesesD = 0;
+            divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US');
         }
     }
 
@@ -208,6 +169,16 @@ const LimpiarHTML = e => {
         btnEnviar.disabled = true;
     }
 
+    inputs.forEach(el => {
+
+        el.classList.contains('border-success') ? el.classList.remove('border-success') : null;
+        el.classList.contains('btn-danger') ? el.classList.remove('btn-danger') : null;
+
+        if (el.id == 'monto-total') el.placeholder = 'Monto total';
+        if (el.id == 'monto-inicial') el.placeholder = 'Monto inicial';
+        if (el.id == 'meses') el.placeholder = 'Meses';
+        if (el.id == 'tasa-anual') el.placeholder = 'Tasa anual';
+    })
     montoIncial.disabled = true;
 }
 
