@@ -7,12 +7,16 @@ const plazoMeses = document.querySelector('#meses');
 const TEA = document.querySelector('#tasa-anual');
 const btnEnviar = document.querySelector('#enviar');
 const inputs = document.querySelectorAll('#agregar-prestamo input');
+const root = document.querySelector('#root');
+const resetForm = document.querySelector('#reset');
+const textosCols = ['Parc', 'Amortización', 'Interés', 'Pago', 'Saldo',]
 
 const LoadScript = () => document.addEventListener('DOMContentLoaded', Exec)
 const Exec = () => {
 
     dataForm.reset();
     montoIncial.disabled = true;
+    btnEnviar.disabled = true;
     inputs.forEach(el => el.addEventListener('input', validarCampos))
 }
 
@@ -93,15 +97,120 @@ const validarCampos = function () {
 
 const Calcular = e => {
 
+    const containerAmort = document.querySelector('#amortizacion-container');
+    containerAmort ? containerAmort.remove() : "";
+
     e.preventDefault();
     const nMontoTotal = parseFloat(montoTotal.value);
     const nMontoInicial = parseFloat(montoIncial.value);
     const nMeses = parseInt(plazoMeses.value);
     const nTEA = parseInt(TEA.value)
     const Amortizacion = new CalcularPrestamo(nMontoTotal, nMontoInicial, nMeses, nTEA);
+    const container = document.createElement('section');
 
-    console.log(Amortizacion)
+    container.classList = "container-xl text-center";
+    container.id = "amortizacion-container"
+
+    for (let i = 0; i <= Amortizacion.meses + 1; i++) {
+
+        const divRow = document.createElement('div');
+        divRow.classList.add('row');
+        container.appendChild(divRow);
+
+        textosCols.forEach(el => {
+
+            const divCol = document.createElement('div');
+            divCol.classList = 'col border border-info p-3'
+            container.children[i].appendChild(divCol);
+
+            if (i === 0) {
+
+                divCol.textContent = el;
+                container.children[0].appendChild(divCol);
+            }
+        })
+
+        if (i === 1) {
+            /*SE IMPLEMENTA IF SOLO PARA AGREGAR LOS .00 EN CASO SEA NUMERO ENTERO */
+            divRow.firstElementChild.textContent = 0;
+            if (Amortizacion.pagos % 1 === 0) {
+
+                divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US') + ".00";
+            }
+            else {
+
+                divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US')
+            }
+        }
+
+        if (i >= 2) {
+
+            Amortizacion.calcularSaldos();
+            divRow.children[0].textContent = i - 1;
+            /*SE IMPLEMENTA IF SOLO PARA AGREGAR LOS .00 EN CASO SEA NUMERO ENTERO */
+            if (Amortizacion.calcularAmortizacion() % 1 === 0) {
+
+                divRow.children[1].textContent = Amortizacion.calcularAmortizacion().toLocaleString('en-US') + ".00";
+            }
+            else {
+
+                divRow.children[1].textContent = Amortizacion.calcularAmortizacion().toLocaleString('en-US');
+            }
+
+            if (Amortizacion.calcularInteres() % 1 === 0) {
+
+                divRow.children[2].textContent = Amortizacion.calcularInteres().toLocaleString('en-US') + ".00";
+            }
+            else {
+
+                divRow.children[2].textContent = Amortizacion.calcularInteres().toLocaleString('en-US');
+            }
+
+            if (Amortizacion.calcularCuotaM() % 1 === 0) {
+
+                divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US') + ".00";
+            }
+            else {
+
+                divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
+            }
+
+            if (Amortizacion.pagos <= 0) Amortizacion.pagos = 0;
+
+            if (Amortizacion.pagos % 0 === 0) {
+
+                divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US') + ".00";
+            }
+            else {
+
+                divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US');
+            }
+        }
+    }
+
+    root.appendChild(container)
 }
+
+const LimpiarHTML = e => {
+
+    e.preventDefault();
+    const containerAmort = document.querySelector('#amortizacion-container');
+
+    if (containerAmort) {
+
+        dataForm.reset();
+        containerAmort.remove();
+        btnEnviar.disabled = true;
+    }
+    else {
+
+        dataForm.reset();
+        btnEnviar.disabled = true;
+    }
+}
+
+
 dataForm.addEventListener('submit', Calcular)
+resetForm.addEventListener('click', LimpiarHTML)
 
 LoadScript();
