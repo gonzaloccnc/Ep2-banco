@@ -207,8 +207,9 @@ const LimpiarHTML = e => {
         dataForm.reset();
         btnEnviar.disabled = true;
     }
-}
 
+    montoIncial.disabled = true;
+}
 
 dataForm.addEventListener('submit', Calcular)
 resetForm.addEventListener('click', LimpiarHTML)
