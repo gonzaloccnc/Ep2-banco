@@ -163,23 +163,22 @@ const Calcular = e => {
     const labelCuotas = document.createElement('label');
     const labelInteres = document.createElement('label');
 
-<<<<<<< HEAD
+
     labelPagos.textContent = 'Cuotas Totales: '
     labelInteres.textContent = 'Intereses Totales: '
     labelCuotas.textContent = 'Cuotas Mensuales: '
-=======
+
     parag.textContent = 'Pago mensual: '
-    parag.classList="bg-info py-3"
+    parag.classList = "bg-info py-3"
     span.textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
     parag.appendChild(span)
     parag2.textContent = 'Total Interes: '
-    parag2.classList="bg-info py-3"
+    parag2.classList = "bg-info py-3"
     span2.textContent = Amortizacion.interescontables.toLocaleString('en-US');
     parag2.appendChild(span2)
     parag3.textContent = 'Total Pagos: '
-    parag3.classList="bg-info py-3"
+    parag3.classList = "bg-info py-3"
     span3.textContent = TotalPagos.toLocaleString('en-US');
->>>>>>> 0b6e3924ad42410d8a5029902aa2634ac10fe5b1
 
     divInput.classList.add('col')
     divInput2.classList = 'col my-3'
