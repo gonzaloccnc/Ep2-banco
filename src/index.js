@@ -174,10 +174,10 @@ const LimpiarHTML = e => {
         el.classList.contains('border-success') ? el.classList.remove('border-success') : null;
         el.classList.contains('btn-danger') ? el.classList.remove('btn-danger') : null;
 
-        if (el.id == 'monto-total') el.placeholder = 'Monto total';
-        if (el.id == 'monto-inicial') el.placeholder = 'Monto inicial';
+        if (el.id == 'monto-total') el.placeholder = 'Monto Total';
+        if (el.id == 'monto-inicial') el.placeholder = 'Monto Inicial';
         if (el.id == 'meses') el.placeholder = 'Meses';
-        if (el.id == 'tasa-anual') el.placeholder = 'Tasa anual';
+        if (el.id == 'tasa-anual') el.placeholder = 'Tasa Anual';
     })
     montoIncial.disabled = true;
 }
