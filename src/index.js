@@ -39,7 +39,7 @@ const validarCampos = function () {
 
             montoTotal.classList.contains('btn-danger') ? montoTotal.classList.toggle('btn-danger') : "";
             montoTotal.classList.add("border-success");
-            montoTotal.value = parseInt(vValueInput);
+            montoTotal.value = Number(vValueInput);
             montoIncial.disabled = false;
             montoIncial.value = "";
             montoIncial.placeholder = "Monto Inicial";
@@ -98,7 +98,9 @@ const validarCampos = function () {
 const Calcular = e => {
 
     const containerAmort = document.querySelector('#amortizacion-container');
+    const divCalculo = document.querySelector('#calculo-total');
     containerAmort ? containerAmort.remove() : "";
+    divCalculo ? divCalculo.remove() : "";
 
     e.preventDefault();
     const nMontoTotal = parseFloat(montoTotal.value);
@@ -110,7 +112,7 @@ const Calcular = e => {
 
     container.classList = "container-xl text-center";
     container.id = "amortizacion-container"
-    
+
     for (let i = 0; i <= Amortizacion.meses + 1; i++) {
 
         const divRow = document.createElement('div');
@@ -132,71 +134,81 @@ const Calcular = e => {
 
         if (i === 1) {
             divRow.firstElementChild.textContent = 0;
-            divRow.lastElementChild.textContent = Amortizacion.pagos.toLocaleString('en-US');
+            divRow.lastElementChild.textContent = 'S/.' + Number(Amortizacion.pagos.toFixed(2)).toLocaleString('en-US');
         }
 
         if (i >= 2) {
 
             Amortizacion.calcularSaldos();
             divRow.children[0].textContent = i - 1;
-            divRow.children[1].textContent = Amortizacion.amortD.toLocaleString('en-US');
-            divRow.children[2].textContent = Amortizacion.interesesD.toLocaleString('en-US');
-            divRow.children[3].textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
+            divRow.children[1].textContent = 'S/.' + Number(Amortizacion.amortD.toFixed(2)).toLocaleString('en-US');
+            divRow.children[2].textContent = 'S/.' + Number(Amortizacion.interesesD.toFixed(2)).toLocaleString('en-US');
+            divRow.children[3].textContent = 'S/.' + Number(Amortizacion.calcularCuotaM().toFixed(2)).toLocaleString('en-US');
 
             if (Amortizacion.pagos <= 0) Amortizacion.pagos = 0;
             if (Amortizacion.interesesD <= 0) Amortizacion.interesesD = 0;
-            divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US');
+            divRow.children[4].textContent = 'S/.' + Number(Amortizacion.pagos.toFixed(2)).toLocaleString('en-US');
         }
     }
-    const TotalPagos = Amortizacion.calcularCuotaM()*Amortizacion.meses
+
+    const TotalPagos = Amortizacion.calcularCuotaM() * Amortizacion.meses
     const divTotal = document.createElement("div");
-    const parag = document.createElement('p');
-    const span = document.createElement('span');
-    const parag2 = document.createElement('p');
-    const span2 = document.createElement('span');
-    const parag3 = document.createElement('p');
-    const span3 = document.createElement('span');
+    const inputPagos = document.createElement('input');
+    const inputInteres = document.createElement('input');
+    const inputCuotas = document.createElement('input');
+    const divInput = document.createElement('div');
+    const divInput2 = document.createElement('div');
+    const divInput3 = document.createElement('div');
+    const labelPagos = document.createElement('label');
+    const labelCuotas = document.createElement('label');
+    const labelInteres = document.createElement('label');
 
-    parag.textContent = 'Pago mensual: '
-    parag.classList="bg-info"
-    span.textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
-    parag.appendChild(span)
-    parag2.textContent = 'Total Interes: '
-    parag2.classList="bg-info"
-    span2.textContent = Amortizacion.interescontables.toLocaleString('en-US');
-    parag2.appendChild(span2)
-    parag3.textContent = 'Total Pagos: '
-    parag3.classList="bg-info"
-    span3.textContent = TotalPagos.toLocaleString('en-US');
+    labelPagos.textContent = 'Cuotas Totales: '
+    labelInteres.textContent = 'Intereses Totales: '
+    labelCuotas.textContent = 'Cuotas Mensuales: '
 
-    parag3.appendChild(span3)
+    divInput.classList.add('col')
+    divInput2.classList = 'col my-3'
+    divInput3.classList.add('col')
+    divInput.append(labelPagos, inputPagos)
+    divInput2.append(labelInteres, inputInteres)
+    divInput3.append(labelCuotas, inputCuotas)
 
-    divTotal.classList="d-flex flex-column gap-3 "
-    divTotal.style.width="300px"
-    divTotal.appendChild(parag)
-    divTotal.appendChild(parag2)
-    divTotal.appendChild(parag3)
-    root.appendChild(divTotal)
-  /*  "<div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-    </div>
-  </div>"*/
-    root.appendChild(container)
+    inputInteres.classList = 'form-control';
+    inputPagos.classList = 'form-control';
+    inputCuotas.classList = 'form-control'
+
+    inputCuotas.id = 'cuotas-mensual'
+    inputInteres.id = 'interes-total'
+    inputPagos.id = 'cuotas-total'
+
+    inputCuotas.value = 'S/.' + Number(Amortizacion.calcularCuotaM().toFixed(2)).toLocaleString('en-US');
+    inputInteres.value = 'S/.' + Number(Amortizacion.interescontables.toFixed(2)).toLocaleString('en-US');
+    inputPagos.value = 'S/.' + Number(TotalPagos.toFixed(2)).toLocaleString('en-US');
+
+    inputInteres.disabled = true;
+    inputPagos.disabled = true;
+    inputCuotas.disabled = true
+
+    divTotal.append(divInput, divInput2, divInput3)
+    divTotal.classList = "mx-auto my-3 p-3 border border-success"
+    divTotal.id = 'calculo-total'
+    divTotal.style.width = "300px"
+
+    root.append(divTotal, container)
 }
 
 const LimpiarHTML = e => {
 
     e.preventDefault();
     const containerAmort = document.querySelector('#amortizacion-container');
+    const divCalculo = document.querySelector('#calculo-total');
 
-    if (containerAmort) {
+    if (containerAmort || divCalculo) {
 
         dataForm.reset();
         containerAmort.remove();
+        divCalculo.remove();
         btnEnviar.disabled = true;
     }
     else {

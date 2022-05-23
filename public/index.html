@@ -23,20 +23,32 @@
                     <form id="agregar-prestamo" class="d-flex flex-column gap-3" action="#">
                         <div class="form-group">
                             <label for="monto-total">Monto Total:</label>
-                            <input type="text" class="form-control" id="monto-total" placeholder="Monto Total">
+                            <div class="d-flex gap-1">
+                                <button type="text" disabled class="btn border-primary">S/.</button>
+                                <input type="text" class="form-control" id="monto-total" placeholder="Monto Total">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="monto-inicial">Monto Incial:</label>
-                            <input disabled type="text" class="form-control" id="monto-inicial"
-                                placeholder="Monto Inicial">
+                            <div class="d-flex gap-1">
+                                <button type="text" disabled class="btn border-primary">S/.</button>
+                                <input disabled type="text" class="form-control" id="monto-inicial"
+                                    placeholder="Monto Inicial">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="meses">Plazo / Meses:</label>
-                            <input type="text" class="form-control" id="meses" placeholder="Meses">
+                            <div class="d-flex gap-1">
+                                <button type="text" disabled class="btn border-primary">S/.</button>
+                                <input type="text" class="form-control" id="meses" placeholder="Meses">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="tasa-anual">Tasa Efectiva Anual(TEA):</label>
-                            <input type="text" class="form-control" id="tasa-anual" placeholder="Tasa Anual">
+                            <div class="d-flex gap-1">
+                                <button type="text" disabled class="btn border-primary">S/.</button>
+                                <input type="text" class="form-control" id="tasa-anual" placeholder="Tasa Anual">
+                            </div>
                         </div>
                         <button id="enviar" type="submit" class="btn d-inline btn-primary">Adquirir</button>
                         <a id="reset" class="btn d-inline btn-danger">Formatear</a>
