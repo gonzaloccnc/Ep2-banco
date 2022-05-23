@@ -110,10 +110,9 @@ const Calcular = e => {
 
     container.classList = "container-xl text-center";
     container.id = "amortizacion-container"
-    let TotalInteres = 0;
+    
     for (let i = 0; i <= Amortizacion.meses + 1; i++) {
-        TotalInteres+=Amortizacion.calcularInteres();
-        console.log(TotalInteres)
+
         const divRow = document.createElement('div');
         divRow.classList.add('row');
         container.appendChild(divRow);
@@ -149,7 +148,43 @@ const Calcular = e => {
             divRow.children[4].textContent = Amortizacion.pagos.toLocaleString('en-US');
         }
     }
+    const TotalPagos = Amortizacion.calcularCuotaM()*Amortizacion.meses
+    const divTotal = document.createElement("div");
+    const parag = document.createElement('p');
+    const span = document.createElement('span');
+    const parag2 = document.createElement('p');
+    const span2 = document.createElement('span');
+    const parag3 = document.createElement('p');
+    const span3 = document.createElement('span');
 
+    parag.textContent = 'Pago mensual: '
+    parag.classList="bg-info"
+    span.textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
+    parag.appendChild(span)
+    parag2.textContent = 'Total Interes: '
+    parag2.classList="bg-info"
+    span2.textContent = Amortizacion.interescontables.toLocaleString('en-US');
+    parag2.appendChild(span2)
+    parag3.textContent = 'Total Pagos: '
+    parag3.classList="bg-info"
+    span3.textContent = TotalPagos.toLocaleString('en-US');
+
+    parag3.appendChild(span3)
+
+    divTotal.classList="d-flex flex-column gap-3 "
+    divTotal.style.width="300px"
+    divTotal.appendChild(parag)
+    divTotal.appendChild(parag2)
+    divTotal.appendChild(parag3)
+    root.appendChild(divTotal)
+  /*  "<div class="row">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+    </div>
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+    </div>
+  </div>"*/
     root.appendChild(container)
 }
 

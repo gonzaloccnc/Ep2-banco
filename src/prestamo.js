@@ -1,7 +1,7 @@
 class CalcularPrestamo {
 
     constructor(montoTotal, montoInicial, meses, tea) {
-
+        this.interescontables = 0;
         this.montoTotal = montoTotal;
         this.montoInicial = montoInicial;
         this.meses = meses;
@@ -38,7 +38,9 @@ class CalcularPrestamo {
 
         const coTea = this.calcularTEM();
         this.interesesD = this.pagos * coTea;
+        this.interescontables+=this.interesesD;
         return Number(this.interesesD.toFixed(2))
+
     }
 
     calcularAmortizacion() {
