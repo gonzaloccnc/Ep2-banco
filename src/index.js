@@ -110,9 +110,10 @@ const Calcular = e => {
 
     container.classList = "container-xl text-center";
     container.id = "amortizacion-container"
-
+    let TotalInteres = 0;
     for (let i = 0; i <= Amortizacion.meses + 1; i++) {
-
+        TotalInteres+=Amortizacion.calcularInteres();
+        console.log(TotalInteres)
         const divRow = document.createElement('div');
         divRow.classList.add('row');
         container.appendChild(divRow);
