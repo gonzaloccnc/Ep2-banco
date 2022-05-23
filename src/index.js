@@ -158,15 +158,15 @@ const Calcular = e => {
     const span3 = document.createElement('span');
 
     parag.textContent = 'Pago mensual: '
-    parag.classList="bg-info"
+    parag.classList="bg-info py-3"
     span.textContent = Amortizacion.calcularCuotaM().toLocaleString('en-US');
     parag.appendChild(span)
     parag2.textContent = 'Total Interes: '
-    parag2.classList="bg-info"
+    parag2.classList="bg-info py-3"
     span2.textContent = Amortizacion.interescontables.toLocaleString('en-US');
     parag2.appendChild(span2)
     parag3.textContent = 'Total Pagos: '
-    parag3.classList="bg-info"
+    parag3.classList="bg-info py-3"
     span3.textContent = TotalPagos.toLocaleString('en-US');
 
     parag3.appendChild(span3)
